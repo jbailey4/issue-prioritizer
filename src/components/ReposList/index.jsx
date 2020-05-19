@@ -1,15 +1,14 @@
 import * as React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import IssuesList from '../IssuesList'
 import { addRepos } from '../../store/repos/actions'
 import { fetchRepos } from '../../api'
 
-const ReposList = () => {
+import styles from './reposlist.module.scss'
+
+const ReposList = ({ didSelectRepo = () => {} }) => {
   const userRepos = useSelector((state) => state.repos)
   const user = useSelector((state) => state.user)
   const dispatch = useDispatch()
-
-  const [selectedRepo, setSelectedRepo] = React.useState(null)
 
   React.useEffect(() => {
     const getRepos = async () => {
@@ -21,17 +20,19 @@ const ReposList = () => {
   }, [user.apiKey])
 
   const handleRepoSelection = (e) => {
-    setSelectedRepo(Number(e.target.value))
+    didSelectRepo(Number(e.target.value))
   }
 
   return (
-    <React.Fragment>
-      <h1>{selectedRepo}</h1>
+    <div className={styles.repoListContent}>
+      <div className={styles.repoListTitle}>
+        Repos ({userRepos && userRepos.length})
+      </div>
       <form>
         {userRepos.length > 0 ? (
           userRepos.map((repo) => {
             return (
-              <div key={repo.id}>
+              <div key={repo.id} className={styles.repoListItem}>
                 <input
                   type="radio"
                   name="repo-selection"
@@ -39,7 +40,9 @@ const ReposList = () => {
                   value={repo.id}
                   onChange={handleRepoSelection}
                 />
-                <label htmlFor={repo.id}>{repo.name}</label>
+                <label htmlFor={repo.id}>
+                  <code>{repo.name}</code>
+                </label>
               </div>
             )
           })
@@ -47,9 +50,7 @@ const ReposList = () => {
           <p>No Repos for user</p>
         )}
       </form>
-
-      <div>{selectedRepo && <IssuesList repoId={selectedRepo} />}</div>
-    </React.Fragment>
+    </div>
   )
 }
 

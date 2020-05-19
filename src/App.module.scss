@@ -1,0 +1,14 @@
+.splitScreen {
+  height: 100vh;
+  display: flex;
+
+  .splitScreenRightPanel {
+    width: 33%;
+    max-width: 300px;
+    overflow: scroll;
+    background: #fff;
+  }
+
+  .splitScreenLeftPanel {
+  }
+}

@@ -1,0 +1,23 @@
+.repoListContent {
+  .repoListTitle {
+    padding: 10px 5px;
+    font-size: 20px;
+  }
+
+  .repoListItem {
+    padding: 5px 5px 10px 5px;
+    transition: background 0.25s;
+
+    input[type='radio'] {
+      position: absolute;
+      clip: rect(0, 0, 0, 0);
+      clip: rect(0 0 0 0);
+    }
+
+    &:hover {
+      cursor: pointer;
+      background: #1b2c48;
+      color: #fff;
+    }
+  }
+}

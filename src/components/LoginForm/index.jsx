@@ -1,4 +1,5 @@
 import * as React from 'react'
+import styles from './loginform.module.scss'
 
 const LoginForm = ({ didLogin }) => {
   const [apiKey, setApiKey] = React.useState('')
@@ -13,9 +14,12 @@ const LoginForm = ({ didLogin }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="api-key">Enter Github API Key:</label>
+    <form className={styles.loginForm} onSubmit={handleSubmit}>
+      <label className={styles.loginFormLabel} htmlFor="api-key">
+        Enter Github API Key
+      </label>
       <input
+        className={styles.loginFormInput}
         type="text"
         id="api-key"
         value={apiKey}
