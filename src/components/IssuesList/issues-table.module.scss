@@ -1,5 +1,7 @@
 .table {
   width: 100%;
+  border-collapse: collapse;
+  background: #f6f8ff;
 
   caption {
     padding: 10px 5px;
@@ -9,10 +11,17 @@
 
   th {
     text-align: left;
+    background: #1b2c48;
+    color: #fff;
   }
 
   th,
   td {
     padding: 10px;
+    border-top: 1px solid #1b2c48;
+  }
+
+  tbody tr:nth-of-type(odd) {
+    background: rgba(#1b2c48, 0.1);
   }
 }

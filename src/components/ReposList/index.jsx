@@ -40,7 +40,7 @@ const ReposList = ({ didSelectRepo = () => {} }) => {
                   value={repo.id}
                   onChange={handleRepoSelection}
                 />
-                <label htmlFor={repo.id}>
+                <label htmlFor={repo.id} className={styles.repoListItemLabel}>
                   <code>{repo.name}</code>
                 </label>
               </div>

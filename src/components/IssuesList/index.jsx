@@ -63,7 +63,12 @@ const IssuesList = ({ repoId }) => {
           </tbody>
         </table>
       ) : (
-        <p>No Issues for this Repo</p>
+        <p>
+          <span role="img" aria-label="Thumbs up emoji">
+            👍
+          </span>{' '}
+          No Issues for <code>{repo.full_name}</code>
+        </p>
       )}
     </React.Fragment>
   )

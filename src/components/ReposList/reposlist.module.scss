@@ -5,19 +5,29 @@
   }
 
   .repoListItem {
-    padding: 5px 5px 10px 5px;
-    transition: background 0.25s;
+    .repoListItemLabel {
+      padding: 5px 5px 10px 5px;
+      transition: background 0.25s;
+      display: block;
+      width: 100%;
+      height: 100%;
+
+      &:hover {
+        cursor: pointer;
+        background: #1b2c48;
+        color: #fff;
+      }
+    }
 
     input[type='radio'] {
       position: absolute;
       clip: rect(0, 0, 0, 0);
       clip: rect(0 0 0 0);
-    }
 
-    &:hover {
-      cursor: pointer;
-      background: #1b2c48;
-      color: #fff;
+      &:checked + label {
+        background: #1b2c48;
+        color: #fff;
+      }
     }
   }
 }
