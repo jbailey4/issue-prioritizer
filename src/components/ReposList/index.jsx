@@ -1,9 +1,12 @@
 import * as React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { addRepos } from '../../store/repos/actions'
-import { fetchRepos } from '../../api'
+import { fetchRepos } from '../../store/repos/actions'
 
 import styles from './repos-list.module.scss'
+
+const getStyles = (isLoading = false) => {
+  return [styles.repoListContent, isLoading ? styles.loading : ''].join(' ')
+}
 
 /*
   Lists the Repos for the currently logged in user.
@@ -12,31 +15,28 @@ import styles from './repos-list.module.scss'
   time a repo selection is made.
  */
 const ReposList = ({ didSelectRepo = () => {} }) => {
-  const userRepos = useSelector((state) => state.repos)
-  const user = useSelector((state) => state.user)
+  const userRepos = useSelector((state) => state.repos.items)
+  const reposLoading = useSelector((state) => state.repos.isFetching)
   const dispatch = useDispatch()
 
   React.useEffect(() => {
-    const getRepos = async () => {
-      const userRepos = await fetchRepos(user.apiKey)
-      dispatch(addRepos(userRepos))
-    }
-
-    getRepos()
-  }, [user.apiKey, dispatch])
+    dispatch(fetchRepos())
+  }, [dispatch])
 
   const handleRepoSelection = (e) => {
     didSelectRepo(Number(e.target.value))
   }
 
   return (
-    <div className={styles.repoListContent}>
+    <div className={getStyles(reposLoading)}>
       <div className={styles.repoListTitle}>
         Repos ({userRepos && userRepos.length})
       </div>
-      <form>
-        {userRepos.length > 0 ? (
-          userRepos.map((repo) => {
+      {reposLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <form>
+          {userRepos.map((repo) => {
             return (
               <div key={repo.id} className={styles.repoListItem}>
                 <input
@@ -51,11 +51,9 @@ const ReposList = ({ didSelectRepo = () => {} }) => {
                 </label>
               </div>
             )
-          })
-        ) : (
-          <p>No Repos for user</p>
-        )}
-      </form>
+          })}
+        </form>
+      )}
     </div>
   )
 }

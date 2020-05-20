@@ -7,7 +7,7 @@ import { getRelativeTime, getFormattedDate } from '../../utils'
 import styles from './issues-table.module.scss'
 
 const IssuesList = ({ repoId }) => {
-  const repos = useSelector((state) => state.repos)
+  const repos = useSelector((state) => state.repos.items)
   const user = useSelector((state) => state.user)
   const [issues, setIssues] = React.useState([])
   const [repo, setRepo] = React.useState('')
