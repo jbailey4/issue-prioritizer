@@ -46,6 +46,10 @@ Your app is ready to be deployed!
 - React Testing Library
 - Prettier
 
+Reordering of issues to adjust the priority is done through drag and drop gestures and/or keyboard up/down arrow keys. The [`react-beautiful-dnd`](https://github.com/atlassian/react-beautiful-dnd) project is used to enable this behavior. Rationale for choosing this project: it's well supported, large feature-set, and thoroughly documented.
+
+_Note: There is a UI bug related to drag and drop where the issue table rows collapse while dragging. This can be fixed with more advanced integration with `react-beautiful-dnd`._
+
 ## Application Overview
 
 The core of the application can be found in the `src` folder at the root of the project.
