@@ -25,7 +25,11 @@ const LoginForm = ({ didLogin }) => {
 
   return (
     <div className={styles.loginFormContainer}>
-      <form className={styles.loginForm} onSubmit={handleSubmit}>
+      <form
+        className={styles.loginForm}
+        onSubmit={handleSubmit}
+        data-testid="login-form"
+      >
         <label className={styles.loginFormLabel} htmlFor="api-key">
           Enter Github API Key
         </label>
@@ -34,6 +38,7 @@ const LoginForm = ({ didLogin }) => {
           className={styles.loginFormInput}
           type="text"
           id="api-key"
+          data-testid="api-key-input"
           value={apiKey}
           onChange={(e) => setApiKey(e.target.value)}
         />
