@@ -1,8 +1,18 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Github Issue Prioritizer
 
-## Available Scripts
+Provides a simple interface to select a Github repo an user has access to and lists the associated issues. The issues can be prioritized in any order by dragging and dropping one issue below/above another.
 
-In the project directory, you can run:
+After reordering issues in the desired priority, the order will persist for the current browser session. Once the browser or tab is closed you must re-login and reorder your issues again. By default issues will be ordered by their created date in a descending order.
+
+Logging into the application only requires a Github API Key, which can be created in your [tokens settings page](https://github.com/settings/tokens).
+
+## Installation
+
+This project uses yarn to manage dependencies, run the following command to install the required dependencies to run the app:
+
+`yarn install`
+
+## Usage
 
 ### `yarn start`
 
@@ -14,8 +24,7 @@ You will also see any lint errors in the console.
 
 ### `yarn test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in the interactive watch mode.
 
 ### `yarn build`
 
@@ -25,20 +34,30 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Technology Used
 
-### `yarn eject`
+- React
+- Redux
+- SASS
+- CSS Modules
+- Jest
+- React Testing Library
+- Prettier
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Application Overview
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The core of the application can be found in the `src` folder at the root of the project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+The `src` folder contains the following subdirectories:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- `components`
+  - `Header` - basic application header that is shown on all screens
+  - `IssuesTable` - holds the logic for displaying and allowing reordering of issues for a particular repo
+  - `LoginForm` - allows the user to enter their Github API key
+  - `ReposList` - displays a list of repos the current logged in user has access to
+- `store`
+  - contains the various reducers, action creators, and store setup logic for the application
 
-## Learn More
+Test specs following the `[name].test.{js|jsx}` naming convention.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+CSS files following the `[component-name].module.scss` naming convention.

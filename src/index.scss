@@ -1,9 +1,5 @@
 @import-normalize; /* bring in normalize.css styles */
 
-:root {
-  --font-color: #1b2c48;
-}
-
 *,
 ::after,
 ::before {
@@ -21,7 +17,7 @@ body {
   background: linear-gradient(213deg, #2c84ff 0%, #975bff 100%);
   background-attachment: fixed;
 
-  color: var(--font-color);
+  color: #1b2c48;
 }
 
 code {
