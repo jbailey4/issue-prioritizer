@@ -12,6 +12,10 @@
   border-radius: 10px;
 
   .loginForm {
+    .error {
+      color: #f16060;
+    }
+
     .loginFormLabel {
       display: block;
       margin-bottom: 20px;
