@@ -1,3 +1,5 @@
+![](https://github.com/jbailey4/issue-prioritizer/workflows/CI/badge.svg)
+
 # Github Issue Prioritizer
 
 Provides a simple interface to select a Github repo an user has access to and lists the associated issues. The issues can be prioritized in any order by dragging and dropping one issue below/above another.
