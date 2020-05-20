@@ -30,7 +30,16 @@ function App() {
               <ReposList didSelectRepo={setSelectedRepo} />
             </aside>
             <section className={styles.splitScreenLeftPanel}>
-              {selectedRepo && <IssuesTable repoId={selectedRepo} />}
+              {selectedRepo ? (
+                <IssuesTable repoId={selectedRepo} />
+              ) : (
+                <p>
+                  <span role="img" aria-label="Pointing left emoji">
+                    👈
+                  </span>{' '}
+                  Please pick a repo.
+                </p>
+              )}
             </section>
           </div>
         ) : (
