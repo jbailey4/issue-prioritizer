@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { useSelector } from 'react-redux'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { fetchIssues } from '../../api'
 
 import styles from './issues-table.module.scss'
@@ -27,50 +28,100 @@ const IssuesList = ({ repoId }) => {
     repo && getIssues()
   }, [repoId])
 
+  const handleDragEnd = (result) => {
+    debugger
+    const { destination, source } = result
+
+    if (!destination) {
+      return
+    }
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return
+    }
+
+    const reorderedIssues = Array.from(issues)
+    const temp = reorderedIssues[source.index]
+    reorderedIssues[source.index] = reorderedIssues[destination.index]
+    reorderedIssues[destination.index] = temp
+
+    setIssues(reorderedIssues)
+  }
+
+  const handleDragStart = function () {
+    debugger
+  }
+
   return (
-    <React.Fragment>
-      {issues && issues.length > 0 ? (
-        <table className={styles.table}>
-          <caption>
-            Issues for <code>{repo.full_name}</code>
-          </caption>
-          <thead>
-            <tr>
-              <th>Avator</th>
-              <th>Title</th>
-              <th>Created</th>
-              <th>Updated</th>
-            </tr>
-          </thead>
-          <tbody>
-            {issues.map(({ id, title, user, created_at, updated_at }) => {
-              return (
-                <tr key={id}>
-                  <td>
-                    <img
-                      src={user.avatar_url}
-                      alt={`Avator for Github user ${user.login}`}
-                      width="40"
-                      height="40"
-                    />
-                  </td>
-                  <td>{title}</td>
-                  <td>{created_at}</td>
-                  <td>{updated_at}</td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      ) : (
-        <p>
-          <span role="img" aria-label="Thumbs up emoji">
-            👍
-          </span>{' '}
-          No Issues for <code>{repo.full_name}</code>
-        </p>
-      )}
-    </React.Fragment>
+    <DragDropContext
+      onDragEnd={handleDragEnd}
+      onBeforeDragStart={handleDragStart}
+    >
+      <React.Fragment>
+        {issues && issues.length > 0 ? (
+          <table className={styles.table}>
+            <caption>
+              Issues for <code>{repo.full_name}</code>
+            </caption>
+            <thead>
+              <tr>
+                <th>Avator</th>
+                <th>Title</th>
+                <th>Created</th>
+                <th>Updated</th>
+              </tr>
+            </thead>
+            <Droppable droppableId="droppable">
+              {(droppableProvided) => (
+                <tbody
+                  ref={droppableProvided.innerRef}
+                  {...droppableProvided.droppableProps}
+                >
+                  {issues.map(
+                    ({ id, title, user, created_at, updated_at }, index) => {
+                      return (
+                        <Draggable key={id} draggableId={`${id}`} index={index}>
+                          {(provided) => (
+                            <tr
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <td>
+                                <img
+                                  src={user.avatar_url}
+                                  alt={`Avator for Github user ${user.login}`}
+                                  width="40"
+                                  height="40"
+                                />
+                              </td>
+                              <td>{title}</td>
+                              <td>{created_at}</td>
+                              <td>{updated_at}</td>
+                            </tr>
+                          )}
+                        </Draggable>
+                      )
+                    }
+                  )}
+                  {droppableProvided.placeholder}
+                </tbody>
+              )}
+            </Droppable>
+          </table>
+        ) : (
+          <p>
+            <span role="img" aria-label="Thumbs up emoji">
+              👍
+            </span>{' '}
+            No Issues for <code>{repo.full_name}</code>
+          </p>
+        )}
+      </React.Fragment>
+    </DragDropContext>
   )
 }
 
