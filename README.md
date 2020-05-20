@@ -58,6 +58,14 @@ The `src` folder contains the following subdirectories:
 - `store`
   - contains the various reducers, action creators, and store setup logic for the application
 
-Test specs following the `[name].test.{js|jsx}` naming convention.
+Test specs follow the `[name].test.{js|jsx}` naming convention.
 
-CSS files following the `[component-name].module.scss` naming convention.
+CSS files follow the `[component-name].module.scss` naming convention.
+
+There is a rough design sketch in the `design_mocks` folder. Sketches were created using [Excalidraw](https://excalidraw.com/).
+
+## Testing
+
+An example of a Jest snapshot test can be found with the [`<Header />` component test spec](https://github.com/jbailey4/issue-prioritizer/blob/master/src/components/Header/header.test.jsx#L6-L9).
+
+Other test coverage examples can be found in the [`<LoginForm />` test spec](https://github.com/jbailey4/issue-prioritizer/blob/master/src/components/LoginForm/login-form.test.jsx) and the [tests for the `utils` module](https://github.com/jbailey4/issue-prioritizer/blob/master/src/utils.test.js).
