@@ -69,3 +69,30 @@ There is a rough design sketch in the `design_mocks` folder. Sketches were creat
 An example of a Jest snapshot test can be found with the [`<Header />` component test spec](https://github.com/jbailey4/issue-prioritizer/blob/master/src/components/Header/header.test.jsx#L6-L9).
 
 Other test coverage examples can be found in the [`<LoginForm />` test spec](https://github.com/jbailey4/issue-prioritizer/blob/master/src/components/LoginForm/login-form.test.jsx) and the [tests for the `utils` module](https://github.com/jbailey4/issue-prioritizer/blob/master/src/utils.test.js).
+
+## Hypothetical Backend API For Persistent Order of Issues
+
+One possibility is to have the frontend app send a batch update (`PUT`, `PATCH`, mutation, etc.) request to the backend for each custom reordering. Each one of the update requests would contain the 2 items that were affected by the reordering along with the new values for the `priority` field.
+
+For example, if an issue with id 1 was reordered below the issue with id 2, the following could be a possible payload request:
+
+```
+PATCH /issues
+
+{
+  issues: [
+    {
+      id: 1,
+      priority: 2
+    },
+    {
+      id: 2,
+      priority: 1
+    }
+  ]
+}
+```
+
+The UI could still optimistically update the issues order, while sending this update request to the backend in background. If the request fails the order could be reverted with a notification shown to the user.
+
+On subsequent visits to the application, the issues that were reordered would now have a `priority` field to sort based off either on the backend or the frontend.
