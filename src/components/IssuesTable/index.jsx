@@ -2,6 +2,7 @@ import * as React from 'react'
 import { useSelector } from 'react-redux'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { fetchIssues } from '../../api'
+import { getRelativeTime, getFormattedDate } from '../../utils'
 
 import styles from './issues-table.module.scss'
 
@@ -101,8 +102,8 @@ const IssuesList = ({ repoId }) => {
                                 />
                               </td>
                               <td>{title}</td>
-                              <td>{created_at}</td>
-                              <td>{updated_at}</td>
+                              <td>{getFormattedDate(created_at)}</td>
+                              <td>{getRelativeTime(updated_at)}</td>
                             </tr>
                           )}
                         </Draggable>
