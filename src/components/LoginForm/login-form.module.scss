@@ -1,23 +1,35 @@
-.loginForm {
-  margin-top: 24px;
-  padding: 0 24px;
+.loginFormContainer {
+  width: 80%;
+  max-width: 1024px;
+  height: 300px;
+
+  margin: 24px auto;
+  padding: 24px;
+
   text-align: center;
+  background: #f6f8ff;
+  box-shadow: 0 4px 8px #56565670;
+  border-radius: 10px;
 
-  .loginFormLabel {
-    display: block;
-    margin-bottom: 10px;
+  .loginForm {
+    .loginFormLabel {
+      display: block;
+      margin-bottom: 20px;
 
-    font-size: 24px;
-  }
+      font-size: 24px;
+    }
 
-  .loginFormInput {
-    display: block;
-    width: 100%;
-    height: 32px;
+    .loginFormInput {
+      display: block;
+      width: 100%;
+      height: 48px;
 
-    padding: 5px 10px;
+      padding: 5px 10px;
 
-    background: #fff;
-    border: 1px solid #ced4da;
+      background: #fff;
+      border: 1px solid #ced4da;
+
+      font-size: 24px;
+    }
   }
 }

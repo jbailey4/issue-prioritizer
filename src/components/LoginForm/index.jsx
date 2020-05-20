@@ -14,18 +14,23 @@ const LoginForm = ({ didLogin }) => {
   }
 
   return (
-    <form className={styles.loginForm} onSubmit={handleSubmit}>
-      <label className={styles.loginFormLabel} htmlFor="api-key">
-        Enter Github API Key
-      </label>
-      <input
-        className={styles.loginFormInput}
-        type="text"
-        id="api-key"
-        value={apiKey}
-        onChange={(e) => setApiKey(e.target.value)}
-      />
-    </form>
+    <div className={styles.loginFormContainer}>
+      <form className={styles.loginForm} onSubmit={handleSubmit}>
+        <label className={styles.loginFormLabel} htmlFor="api-key">
+          Enter Github API Key
+        </label>
+        <input
+          className={styles.loginFormInput}
+          type="text"
+          id="api-key"
+          value={apiKey}
+          onChange={(e) => setApiKey(e.target.value)}
+        />
+        <p>
+          <em>Press enter key to submit</em>
+        </p>
+      </form>
+    </div>
   )
 }
 
