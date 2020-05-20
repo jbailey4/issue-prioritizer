@@ -5,6 +5,12 @@ import { fetchRepos } from '../../api'
 
 import styles from './repos-list.module.scss'
 
+/*
+  Lists the Repos for the currently logged in user.
+
+  The `didSelectRepo` prop action will be called each
+  time a repo selection is made.
+ */
 const ReposList = ({ didSelectRepo = () => {} }) => {
   const userRepos = useSelector((state) => state.repos)
   const user = useSelector((state) => state.user)
