@@ -1,9 +1,16 @@
-export const fetchIssues = async (issueUrl, apiKey) => {
-  const issuesResponse = await fetch(`${issueUrl.replace('{/number}', '')}`, {
+export const fetchWithAuthorization = (url, apiKey) => {
+  return fetch(url, {
     headers: new Headers({
       Authorization: `Basic ${btoa(apiKey)}`,
     }),
   })
+}
+
+export const fetchIssues = async (issueUrl, apiKey) => {
+  const issuesResponse = await fetchWithAuthorization(
+    `${issueUrl.replace('{/number}', '')}`,
+    apiKey
+  )
 
   if (issuesResponse.ok) {
     const issues = await issuesResponse.json()
@@ -15,11 +22,10 @@ export const fetchIssues = async (issueUrl, apiKey) => {
 }
 
 export const fetchRepos = async (apiKey) => {
-  const reposResponse = await fetch('https://api.github.com/user/repos', {
-    headers: new Headers({
-      Authorization: `Basic ${btoa(apiKey)}`,
-    }),
-  })
+  const reposResponse = await fetchWithAuthorization(
+    'https://api.github.com/user/repos',
+    apiKey
+  )
 
   if (reposResponse.ok) {
     const userRepos = await reposResponse.json()
