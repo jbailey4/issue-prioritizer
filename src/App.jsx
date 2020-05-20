@@ -5,7 +5,7 @@ import { loginAction } from './store/user/actions'
 
 import LoginForm from './components/LoginForm'
 import ReposList from './components/ReposList'
-import IssuesList from './components/IssuesList'
+import IssuesTable from './components/IssuesTable'
 import Header from './components/Header'
 import styles from './App.module.scss'
 
@@ -30,7 +30,7 @@ function App() {
               <ReposList didSelectRepo={setSelectedRepo} />
             </aside>
             <section className={styles.splitScreenLeftPanel}>
-              {selectedRepo && <IssuesList repoId={selectedRepo} />}
+              {selectedRepo && <IssuesTable repoId={selectedRepo} />}
             </section>
           </div>
         ) : (

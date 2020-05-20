@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styles from './loginform.module.scss'
+import styles from './login-form.module.scss'
 
 const LoginForm = ({ didLogin }) => {
   const [apiKey, setApiKey] = React.useState('')

@@ -34,7 +34,7 @@ const IssuesList = ({ repoId }) => {
     }
 
     repo && getIssues()
-  }, [repoId])
+  }, [repoId, repos, user.apiKey])
 
   const handleDragEnd = (result) => {
     const { destination, source } = result

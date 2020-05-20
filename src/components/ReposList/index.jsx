@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { addRepos } from '../../store/repos/actions'
 import { fetchRepos } from '../../api'
 
-import styles from './reposlist.module.scss'
+import styles from './repos-list.module.scss'
 
 const ReposList = ({ didSelectRepo = () => {} }) => {
   const userRepos = useSelector((state) => state.repos)
@@ -17,7 +17,7 @@ const ReposList = ({ didSelectRepo = () => {} }) => {
     }
 
     getRepos()
-  }, [user.apiKey])
+  }, [user.apiKey, dispatch])
 
   const handleRepoSelection = (e) => {
     didSelectRepo(Number(e.target.value))
