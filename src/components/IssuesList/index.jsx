@@ -18,18 +18,25 @@ const IssuesList = ({ repoId }) => {
       }) || {}
     const issueUrl = repo.issues_url || ''
 
+    setRepo(repo)
+
     const getIssues = async () => {
-      const issues = await fetchIssues(issueUrl, user.apiKey)
+      let issues
+
+      const cachedOrderedIssues = sessionStorage.getItem(`${repoId}-issues`)
+      if (cachedOrderedIssues) {
+        issues = JSON.parse(cachedOrderedIssues)
+      } else {
+        issues = await fetchIssues(issueUrl, user.apiKey)
+      }
 
       setIssues(issues)
-      setRepo(repo)
     }
 
     repo && getIssues()
   }, [repoId])
 
   const handleDragEnd = (result) => {
-    debugger
     const { destination, source } = result
 
     if (!destination) {
@@ -48,18 +55,13 @@ const IssuesList = ({ repoId }) => {
     reorderedIssues[source.index] = reorderedIssues[destination.index]
     reorderedIssues[destination.index] = temp
 
+    sessionStorage.setItem(`${repoId}-issues`, JSON.stringify(reorderedIssues))
+
     setIssues(reorderedIssues)
   }
 
-  const handleDragStart = function () {
-    debugger
-  }
-
   return (
-    <DragDropContext
-      onDragEnd={handleDragEnd}
-      onBeforeDragStart={handleDragStart}
-    >
+    <DragDropContext onDragEnd={handleDragEnd}>
       <React.Fragment>
         {issues && issues.length > 0 ? (
           <table className={styles.table}>

@@ -7,7 +7,10 @@ export const fetchIssues = async (issueUrl, apiKey) => {
 
   if (issuesResponse.ok) {
     const issues = await issuesResponse.json()
-    return issues
+    return issues.map(({ id, title, user, created_at, updated_at }) => {
+      const { avatar_url, login } = user
+      return { id, title, user: { avatar_url, login }, created_at, updated_at }
+    })
   }
 }
 
