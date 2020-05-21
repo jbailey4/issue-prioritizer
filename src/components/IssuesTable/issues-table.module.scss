@@ -2,7 +2,6 @@
   width: 100%;
   border-collapse: collapse;
   background: #f6f8ff;
-  table-layout: fixed;
 
   caption {
     padding: 10px 5px;
@@ -22,7 +21,15 @@
     border-top: 1px solid #1b2c48;
   }
 
+  tr {
+    background: #fff;
+  }
+
+  .tableAvatarCell {
+    width: 80px;
+  }
+
   tbody tr:nth-of-type(odd) {
-    background: rgba(#1b2c48, 0.1);
+    background: #ededed;
   }
 }

@@ -93,7 +93,7 @@ const IssuesList = ({ repoId }) => {
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
                             >
-                              <td>
+                              <td className={styles.tableAvatarCell}>
                                 <img
                                   src={user.avatar_url}
                                   alt={`Avator for Github user ${user.login}`}
